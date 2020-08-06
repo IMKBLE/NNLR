@@ -1,0 +1,28 @@
+
+addpath(genpath(pwd));
+
+load('MSRC.mat')
+load('idx_0.5train.mat')
+
+% input data
+num = 1;
+train_data = cell(1,5);
+test_data = cell(1,5);
+v = size(traiin_data,2);
+
+for i = 1:v
+    data = X{1,i};
+    train_data{1,i} = data(:,trainIdx(num,:));
+    test_data{1,i} = data(:,testIdx(num,:));
+end
+
+label = X{1,6};
+train_label = label(trainIdx(num,:));
+test_label = label(testIdx(num,:));
+
+% input parameter
+lamda                   %lamda/p_v=1 or ==1
+s                       %  min_p_v =24,c = 7; S取[1,6]中的整数
+multi_view_predict = 'sum';
+
+acc = MLR(train_data,train_label,test_data,test_label,lamda,s,muli_view_predict);
